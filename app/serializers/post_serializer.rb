@@ -1,12 +1,6 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :title,:short_content,:tags
-  has_many :post_tags
-  has_many :tags, through: :post_tags
+  attributes :title,:content,:author
 
-
-
-  def short_content
-    "#{self.object.content[0..40]...}"
-  end
-
+  belongs_to :author,serializer: AuthorSummarySerializer
+  has_many :tags
 end
